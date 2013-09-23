@@ -1,0 +1,83 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {% if collector.data %}
+        {% if collector.data.status == 0 %}
+			{% set icon %}
+                <span style="line-height:28px;">
+					<img alt="Security-checker" src="data:image/png;base64,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"/>
+				</span>
+            {% endset %}
+			{% set text %}
+                <div class="sf-toolbar-info-piece">
+                    <b>No data available</b>
+                </div>
+            {% endset %}
+		{% else %}
+			{% set color_code = (collector.data.numAdvisories > 0) ? 'red' : 'green'  %}
+			{% set icon %}
+                <span style="line-height:28px;">
+					<img alt="Seceurity-checker" src="data:image/png;base64,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"/>
+				</span>
+                <span class="sf-toolbar-status sf-toolbar-status-{{ color_code }}">{{ collector.data.numAdvisories }}</span>
+            {% endset %}
+			{% set text %}
+                <div class="sf-toolbar-info-piece">
+                    <b>Total packages</b>
+                    <span class="sf-toolbar-status">{{ collector.data.numPackages }}</span>
+                </div>
+                <div class="sf-toolbar-info-piece">
+                    <b>Total advisories</b>
+                    <span class="sf-toolbar-status">{{ collector.data.numAdvisories }}</span>
+                </div>
+            {% endset %}
+		{% endif %}
+		{% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+	{% endif %}
+{% endblock %}
+
+{% block menu %}
+<span class="label">
+    <span class="icon">
+		<img width="32" height="32" alt="Security-checker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAGBElEQVR4Xu2XbVBTVxrH/wmBEEASBbMQlIDrbn0pMYpddLR1HS0rO7ujH9qOOtO6uM7QMuVLO7UzVbqz2KLsrN2pdaaroq3YurTrTGtFq0UMiLoicZUAUlYggpgiCW9icm9e7j37nJnzgQ87bNTaTz4zv+TMc/7Pc55z7rk5J3hij4hG8JNbIpFN2AXZwvfYTUuYy8vL3/B6vT8oiqJyeJv7eJ/QRGcPKI4nflldXf1+ScnrFUaTMQ2AhpvJZEorKSmp4H1cw7U/ZgGxxIzi4uJXrl3799drCtZs0UQU3ZVt23FsyRIcy8vDlW3bgEhEl/+b/C1OZ/PXRa8WbeIxInZS00zijyOmr1u3dlnh5s1F9gULVhgSDNrI3UE0/aEQitOJaUI8QsQszkXuwYNASgrGx+8xl8vV8NmRz/5eU3PyIgAvESJYNAUkarVa66uvFeWvWrVq/dy5c54xGAxamjW6Kw+ib89HmB4IIANAqlhCH3GH8CYkIK34NaRv3IAIAH8goHZ2djY3Nl748kjVkdOqqvZy92QFxBB5J2qOf5VpzTTHxsZClST0fHkMvZ8cRvzAANIBDsyESRQwKqboIQYIv9mM1PUvwVxQADVWBzkYRG9vr+/14pK1AJoIBcJ0/2NFkn3D3inJpilortgN39lzSKYipotBp4r3LU5Uq+Vt4ZtGqMTg4CCt1F649h+AYelSJK/7Pbq6u5N4bkIz2SZUCVmW5AB9wO2oRxwNzgc1iq1tKS2FYrNB4WINoBCMkK1WmLduhV5oTVwvBzFw+TJGxkYRCoYknptQJyuAEYHx8fFRkCUZjdBPmK2VBs8qK8PsujoM2m2QKTpIeLKs+LnDgeyKCswkDdeKOOgTE8FUFf6An+cMEOz/FTDi8Xj6VAoyUeKJwoHjxxH0+RCXmoo5tXXotC9Ae1YWZp9zwJCdzfu4BjETnqfebIaiKBgdGe3juSctQDDWe6uvKxKJIGXuHDCxZhpOqwtNz6+GTAPpqYiFp8/CVlePxKxs7sPl/NXQkYZrVUHczBkIhyMY8g3d5Lmj+SG6f/26yyXLMkvJmS8SAYyI0QDGdhcuFDyPAA1ooCKSrVYEhnxoIN806tORhk2IibVmIhQKsb7b/S6eO5oCgu4e943bff13jPPmIj41BQpAiJXQAGH/fYQDfkw0rmHUyTWKQDfVBNWSjpFheqp3PO08dzQFKERve/uNa7xh/vUKRACERfTdXzyF52rrYcy0wk8z5ySkpGLlt7W4+3QOZKHlMTpbDsKqiv7+O9d4TkKJ9izwnq9vrL/v96vpv/stVK0WIQChefOx/KwDiRkZkPiyr10DByGJx/Es7QkpxwYZ4DHQLF4MSZLU77/vbOA58QAWQzxb9t6f2urP17Ejy5ex/QC7WlrKuMleL6vPW8j6zHoOcyxZyCTyceOaSoDts9vZe++XsfUbXmoHsFzkjPo0VIj/nP72u1P0/rKMwk1gOh3aduxAy7vv4hLtdqOrBUFJQYiY2tKCf5GP990gDdeq+asgyRIdSq0nAdwklKhPQ0EssfKvH/zl47wlv5o1vOdjDFV/AQOAZIpK0gJ6viOpHVIZ7qvAOAMkPtWCNfCsXIGOjg73p59UFQGoJ8J4CEvLsT1d9k3NV+EmRy07Ons2OwywL4jjxEnilGj/k6giPp81i+372262vfSdSHZ2VhnP8SgXEm+rq63mzJnai8FYHZ7a+yF0tAFlcaaOc0RbInQWC/RvvYl7qoLr11suuN23TvAcj1KAQnQcrDxUSQk9ME+H7dNDmJKbiyDAgSy+kxYtws8qdsGflAi32+2p/e7sAR5LKNHdiCbXpFss6S/vqtj5dm5u7tR4bQzGL1zCqNMJbkkL7YDNhsGRYTQ7naMf7dm7y+fzVYnrAfuxbsNZFotl+/7KfQNt7S7W3dPF3O4e1tV9k7W1tbLzjQ2sfGf5gNls3sa1hPZxXMkz6BL8x40bNzT8o/romPNqs3KluUmpqjo89uKLLzTwPgAWrn2c/4SSCDtRSPyZI9oLRJ8GP4FpIG5igriHHfiJ/RfLJru3osplcAAAAABJRU5ErkJggg=="/>
+	</span>
+    <strong>Security checker</strong>
+	{% if collector.data.status == 1 %}
+    <span class="count">
+        <span>{{ collector.data.numAdvisories }}</span>
+    </span>
+	{% endif %}
+</span>
+{% endblock %}
+
+{% block panel %}
+	{% if collector.data.status == 0 %}
+		<div>
+			<h3>No data available</h3>
+			The client could not connect to the web service. Maybe you are offline?
+		</div>
+	{% else %}
+		{% for package, details in collector.data.taintedPackages %}
+			<h3>{{ package }} - {{ details.version }} </h3>
+			
+			<table class="inline">
+				<tr>
+					<th>CVE</th>
+					<th>Title</th>
+					<th>Link</th>
+				</tr>
+				{% for key, advisory in details.advisories|cast_to_array %}
+					{# nasty side effect #}
+					{% set advisory = advisory.1 %}
+					
+					<tr>
+						<td><code>{{ advisory.cve }}</code></td>
+						<td><code>{{ advisory.title }}</code></td>
+						<td><code><a href="{{ advisory.link }}" target="_blank">{{ advisory.link }}</a></code></td>
+					</tr>
+				{% endfor %}
+			</table>
+			
+		{% endfor %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,5 @@
+Security-checker-bundle
+====================
+
+Installation
+------------

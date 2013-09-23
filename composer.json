@@ -1,0 +1,22 @@
+{
+    "name": "adchieve/security-checker-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony AdchieveSecurityCheckerBundle",
+    "keywords": ["Security-checker", "Advisories", "symfony2", "bundle"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bas Hilbers",
+            "email": "bas.hilbers@tribal-im.com",
+            "homepage": "http://adchieve.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "sensiolabs/security-checker:dev-master": "dev-master"
+    },
+	"require-dev": {
+        "symfony/framework-bundle": ">=2.1.0,<2.3-dev"
+    }
+}

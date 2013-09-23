@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		<parameter key="adchieve_security_checker.data_collector.security_checker.class">Adchieve\SecurityCheckerBundle\DataCollector\SecurityCheckerDataCollector</parameter>
+		<parameter key="adchieve_security_checker.securitychecker.class">Adchieve\SecurityCheckerBundle\Checker\SecurityCheckerProxy</parameter>
+	</parameters>
+	
+    <services>
+		<service id="securityChecker" class="%adchieve_security_checker.securitychecker.class%" />
+	
+        <service id="adchieve_security_checker.data_collector.security_checker" class="%adchieve_security_checker.data_collector.security_checker.class%">
+            <argument type="service" id="securityChecker" />
+			<argument type="string">%kernel.root_dir%/../composer.lock</argument>
+			<tag name="data_collector" template="AdchieveSecurityCheckerBundle:Collector:securitychecker" id="security_checker" />
+        </service>
+		
+		<service id="adchieve_security_checker.twig.cast_to_array_extension" class="Adchieve\SecurityCheckerBundle\Twig\Extension\CastToArrayExtension">
+			<tag name="twig.extension" />
+		</service>
+    </services>
+</container>
